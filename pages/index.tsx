@@ -1,12 +1,15 @@
 import type { NextPage } from "next";
 import Layout from "../src/components/common/Layout";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
+import React from "react";
 
 const Home: NextPage = () => {
   return (
     <>
       <Layout>
-        <Box>홈</Box>
+        <Container maxWidth={"xl"}>
+          <div>home</div>
+        </Container>
       </Layout>
     </>
   );

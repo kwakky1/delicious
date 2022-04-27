@@ -9,7 +9,7 @@ import {
   Select,
 } from "@mui/material";
 import { useFormContext, Controller } from "react-hook-form";
-import { InputType } from "../Interface";
+import { InputType } from "../../../pages/random";
 
 const MultiSelect = ({ field, label, option }: InputType) => {
   const {
@@ -17,17 +17,17 @@ const MultiSelect = ({ field, label, option }: InputType) => {
     formState: { errors },
   } = useFormContext();
   const makeOption = (value: any) =>
-    option?.map((obj) => {
+    option?.map((name) => {
       return (
-        <MenuItem key={obj.value} value={obj.value}>
-          <Checkbox checked={value?.indexOf(obj.value) > -1} />
-          <ListItemText primary={obj.label} />
+        <MenuItem key={name} value={name}>
+          <Checkbox checked={value?.indexOf(name) > -1} />
+          <ListItemText primary={name} />
         </MenuItem>
       );
     });
 
   return (
-    <Grid item xs={2}>
+    <Grid item xs={12}>
       <Controller
         name={field}
         control={control}

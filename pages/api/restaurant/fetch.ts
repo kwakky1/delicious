@@ -66,7 +66,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return Object.fromEntries(rowObj as any);
       }
     }) as RestaurantType[];
-    res.status(201).json({ data: result });
+    res.status(201).json(result);
   } catch (err) {
     res.status(500).json({ error: "restaurant fetch error" });
   }
