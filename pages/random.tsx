@@ -101,7 +101,36 @@ const Random = () => {
   };
 
   const filteredRestaurant = useMemo(
-    () => restaurantList?.filter((store) => filter?.type?.includes(store.type)),
+    () =>
+      restaurantList
+        ?.filter((store) => {
+          if (filter?.type) {
+            return filter?.type?.includes(store.type);
+          }
+          return true;
+        })
+        .filter((store) => {
+          if (filter?.person) {
+            return store.picker.find((person) =>
+              filter.person.includes(person)
+            );
+          }
+          return true;
+        })
+        .filter((store) => {
+          if (filter?.place?.includes("배달")) {
+            return store.delivery;
+          } else if (filter?.place?.includes("방문")) {
+            return store.visit;
+          } else if (
+            filter?.place?.includes("배달") &&
+            filter?.place?.includes("방문")
+          ) {
+            return store.delivery && store.visit;
+          }
+          return true;
+        }),
+
     [filter, restaurantList]
   );
 
@@ -155,11 +184,7 @@ const Random = () => {
         </Container>
       </Layout>
       <RandomModal
-        restaurantList={
-          filteredRestaurant !== undefined && filteredRestaurant?.length < 1
-            ? restaurantList
-            : filteredRestaurant
-        }
+        restaurantList={filteredRestaurant}
         modal={modal}
         setModal={setModal}
       />
