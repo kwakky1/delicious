@@ -15,6 +15,7 @@ import { GetServerSideProps } from "next";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import MultiSelect from "../src/components/form/MultiSelect";
 import { server } from "../src/config";
+import RandomModal from "../src/components/RandomModal";
 
 export const fetchRestaurantList = async (): Promise<RestaurantType[]> => {
   const res = await fetch(`${server}/api/restaurant/fetch`, {
@@ -53,6 +54,8 @@ export interface InputType {
 }
 
 const Random = () => {
+  const [modal, setModal] = useState<boolean>(false);
+
   const { data: restaurantList }: UseQueryResult<RestaurantType[], Error> =
     useQuery<RestaurantType[], Error>("restaurantList", fetchRestaurantList);
   const methods = useForm<FormInput>({ mode: "all" });
@@ -94,14 +97,13 @@ const Random = () => {
   const [filter, setFilter] = useState<FormInput | null>(null);
   const onSubmit: SubmitHandler<FormInput> = (data) => {
     setFilter(data);
+    setModal(true);
   };
 
   const filteredRestaurant = useMemo(
     () => restaurantList?.filter((store) => filter?.type?.includes(store.type)),
     [filter, restaurantList]
   );
-
-  console.log(filteredRestaurant);
 
   return (
     <>
@@ -152,6 +154,15 @@ const Random = () => {
           </Container>
         </Container>
       </Layout>
+      <RandomModal
+        restaurantList={
+          filteredRestaurant !== undefined && filteredRestaurant?.length < 1
+            ? restaurantList
+            : filteredRestaurant
+        }
+        modal={modal}
+        setModal={setModal}
+      />
     </>
   );
 };
