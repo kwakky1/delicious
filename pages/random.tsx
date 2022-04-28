@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, Suspense } from "react";
 import Layout from "../src/components/common/Layout";
 import { RestaurantType } from "./api/restaurant/fetch";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
@@ -11,11 +11,12 @@ import {
   UseQueryResult,
 } from "react-query";
 
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import MultiSelect from "../src/components/form/MultiSelect";
 import { server } from "../src/config";
 import RandomModal from "../src/components/RandomModal";
+import Loading from "../src/components/common/Loading";
 
 export const fetchRestaurantList = async (): Promise<RestaurantType[]> => {
   const res = await fetch(`${server}/api/restaurant/fetch`, {
@@ -30,7 +31,7 @@ export const fetchRestaurantList = async (): Promise<RestaurantType[]> => {
   throw new Error("FetchRestaurantList Network response not ok");
 };
 
-export const getServerSideProps: GetServerSideProps = async (
+export const getStaticProps: GetStaticProps = async (
   context
 ): Promise<{
   props: { dehydratedState: DehydratedState };
@@ -133,7 +134,9 @@ const Random = () => {
 
     [filter, restaurantList]
   );
-
+  if (!restaurantList) {
+    return <Loading />;
+  }
   return (
     <>
       <Layout>
