@@ -4,6 +4,7 @@ import { Client } from "@notionhq/client";
 // restaurant
 
 export interface RestaurantType {
+  id: string;
   name: string;
   type: string;
   address: string;
@@ -26,6 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
     response.results.shift();
     const result = response.results.map((row, index) => {
+      const id = row.id;
       if ("properties" in row) {
         const rowObj = Object.entries(row.properties).map((field) => {
           switch (field[1].type) {
@@ -63,7 +65,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               return null;
           }
         });
-        return Object.fromEntries(rowObj as any);
+        const list = rowObj.concat([["id", id]]);
+        return Object.fromEntries(list as any);
       }
     }) as RestaurantType[];
     res.status(201).json(result);

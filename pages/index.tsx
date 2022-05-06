@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Layout from "../src/components/common/Layout";
-import { Box, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import React from "react";
 
 const Home: NextPage = () => {

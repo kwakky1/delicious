@@ -16,7 +16,6 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import MultiSelect from "../src/components/form/MultiSelect";
 import { server } from "../src/config";
 import RandomModal from "../src/components/RandomModal";
-import Loading from "../src/components/common/Loading";
 
 export const fetchRestaurantList = async (): Promise<RestaurantType[]> => {
   const res = await fetch(`${server}/api/restaurant/fetch`, {
@@ -105,13 +104,13 @@ const Random = () => {
     () =>
       restaurantList
         ?.filter((store) => {
-          if (filter?.type) {
+          if (filter?.type && filter?.type.length > 0) {
             return filter?.type?.includes(store.type);
           }
           return true;
         })
         .filter((store) => {
-          if (filter?.person) {
+          if (filter?.person && filter?.person.length > 0) {
             return store.picker.find((person) =>
               filter.person.includes(person)
             );
@@ -131,12 +130,9 @@ const Random = () => {
           }
           return true;
         }),
-
     [filter, restaurantList]
   );
-  if (!restaurantList) {
-    return <Loading />;
-  }
+
   return (
     <>
       <Layout>
@@ -180,9 +176,6 @@ const Random = () => {
                 </Grid>
               </form>
             </FormProvider>
-            {filteredRestaurant?.map((store) => (
-              <div key={store.name}>{store.name}</div>
-            ))}
           </Container>
         </Container>
       </Layout>
