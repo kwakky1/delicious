@@ -49,7 +49,7 @@ const Detail = ({ router }: DetailProps) => {
                 width={400}
                 height={200}
                 placeholder={"blur"}
-                blurDataURL={url}
+                blurDataURL="/blur.jpg"
                 alt={`${name}_${index}`}
               />
             ))}
