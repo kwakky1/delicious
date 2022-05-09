@@ -60,7 +60,14 @@ const Detail = ({ router }: DetailProps) => {
                   justifyContent={"flex-end"}
                   alignItems={"center"}
                 >
-                  <Box onClick={() => handlePhone(phone)}>
+                  <Box
+                    sx={{
+                      padding: 1,
+                      border: "1px solid",
+                      borderRadius: "50%",
+                    }}
+                    onClick={() => handlePhone(phone)}
+                  >
                     <PhoneIcon />
                   </Box>
                 </Grid>
