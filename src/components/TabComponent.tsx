@@ -10,7 +10,7 @@ interface TabComponentProps {
 }
 
 const TabComponent = ({ restaurant }: TabComponentProps) => {
-  const { address, img, review } = restaurant;
+  const { img, review } = restaurant;
   const [value, setValue] = React.useState(0);
 
   const a11yProps = (index: number) => {

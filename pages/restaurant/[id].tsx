@@ -44,53 +44,33 @@ const Detail = ({ router }: DetailProps) => {
         <Container maxWidth={"xl"}>
           <Container maxWidth={"sm"}>
             <Box>
-              <Grid container rowSpacing={1} my={2}>
-                <Grid item xs={6}>
-                  <Grid container flexDirection={"column"} spacing={1}>
-                    <Grid item>
-                      <Typography fontWeight={"bold"} fontSize={30}>
-                        {name}
-                      </Typography>
-                    </Grid>
-                    <Grid item>
-                      <Chip label={type} />
-                    </Grid>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  py: 2,
+                }}
+              >
+                <Grid container flexDirection={"column"} spacing={1}>
+                  <Grid item>
+                    <Typography fontWeight={"bold"} fontSize={30}>
+                      {name}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Chip label={type} />
                   </Grid>
                 </Grid>
-                <Grid
-                  item
-                  xs={6}
-                  display={"flex"}
-                  justifyContent={"flex-end"}
-                  alignItems={"center"}
+                <Fab
+                  size="medium"
+                  color="primary"
+                  onClick={() => handlePhone(phone)}
                 >
-                  <Fab
-                    size="medium"
-                    color="primary"
-                    onClick={() => handlePhone(phone)}
-                  >
-                    <PhoneIcon />
-                  </Fab>
-                </Grid>
-              </Grid>
+                  <PhoneIcon />
+                </Fab>
+              </Box>
               <TabComponent restaurant={restaurant} />
-              {/*<SingleMap address={address} code={"kakao_map"} />
-              <Typography>{address}</Typography>
-              <Typography>메뉴</Typography>
-              <Swiper slidesPerView={1} spaceBetween={10} loop navigation>
-                {img.map((url, index) => (
-                  <SwiperSlide key={`image_${index}`}>
-                    <Image
-                      src={url}
-                      width={500}
-                      height={500}
-                      placeholder={"blur"}
-                      blurDataURL="/blur.jpg"
-                      alt={`${name}_${index}`}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>*/}
             </Box>
           </Container>
         </Container>

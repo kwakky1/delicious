@@ -45,6 +45,7 @@ const SingleMap = (props: mapProps) => {
             126.95249620249871
           ), // 지도의 중심좌표
           level: 5, // 지도의 확대 레벨
+          draggable: false,
         };
         const map = new window.kakao.maps.Map(container, mapOption);
         const geocoder = new window.kakao.maps.services.Geocoder();
