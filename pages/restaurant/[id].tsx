@@ -62,13 +62,15 @@ const Detail = ({ router }: DetailProps) => {
                     <Chip label={type} />
                   </Grid>
                 </Grid>
-                <Fab
-                  size="medium"
-                  color="primary"
-                  onClick={() => handlePhone(phone)}
-                >
-                  <PhoneIcon />
-                </Fab>
+                <Box>
+                  <Fab
+                    size="medium"
+                    color="primary"
+                    onClick={() => handlePhone(phone)}
+                  >
+                    <PhoneIcon />
+                  </Fab>
+                </Box>
               </Box>
               <TabComponent restaurant={restaurant} />
             </Box>

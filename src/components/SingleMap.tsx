@@ -83,7 +83,7 @@ const SingleMap = (props: mapProps) => {
         window.location.href = `https://map.kakao.com/link/to/${props.restaurant.name},${position.lat},${position.lat}`;
         break;
       case "naverMap":
-        window.location.href = `http://app.map.naver.com/launchApp/?version=11&menu=walk&elat=${position.lat}&elng=${position.lng}&etitle=${props.restaurant.name}`;
+        window.location.href = `http://app.map.naver.com/launchApp/?version=11&menu=navigation&elat=${position.lat}&elng=${position.lng}&etitle=${props.restaurant.name}`;
         break;
       default:
         break;
