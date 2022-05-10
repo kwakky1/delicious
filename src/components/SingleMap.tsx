@@ -25,7 +25,10 @@ const SingleMap = (props: mapProps) => {
   const {
     restaurant: { name, address },
   } = props;
-
+  const breezmPosition = {
+    lat: 37.54539986598497,
+    lng: 126.95249620249871,
+  };
   const [position, setPosition] = useState<positionType>({ lat: 0, lng: 0 });
 
   useEffect(() => {
@@ -41,8 +44,8 @@ const SingleMap = (props: mapProps) => {
         const container = document.getElementById("map");
         const mapOption = {
           center: new window.kakao.maps.LatLng(
-            37.54539986598497,
-            126.95249620249871
+            breezmPosition.lat,
+            breezmPosition.lng
           ), // 지도의 중심좌표
           level: 5, // 지도의 확대 레벨
           draggable: false,
@@ -80,10 +83,10 @@ const SingleMap = (props: mapProps) => {
   const handleGuide = (e: React.MouseEvent<HTMLImageElement>, name: string) => {
     switch (name) {
       case "kakaoMap":
-        window.location.href = `https://map.kakao.com/link/to/${props.restaurant.name},${position.lat},${position.lat}`;
+        window.location.href = `https://map.kakao.com/link/to/${props.restaurant.name},${position.lat},${position.lng}`;
         break;
       case "naverMap":
-        window.location.href = `http://app.map.naver.com/launchApp/?version=11&menu=navigation&elat=${position.lat}&elng=${position.lng}&etitle=${props.restaurant.name}`;
+        window.location.href = `nmap://route/walk?slat=${breezmPosition.lat}&slng=${breezmPosition.lng}&sname=브리즘&dlat=${position.lat}&dlng=${position.lng}&dname=${props.restaurant.name}&appname=https://visionary-malasada-2131be.netlify.app`;
         break;
       default:
         break;
