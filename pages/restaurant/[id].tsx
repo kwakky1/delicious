@@ -1,20 +1,24 @@
 import React from "react";
-import { Box, Button, Chip, Container, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Chip,
+  Container,
+  Fab,
+  Grid,
+  Typography,
+} from "@mui/material";
 import Layout from "../../src/components/common/Layout";
 import { useQuery, UseQueryResult } from "react-query";
 import { RestaurantType } from "../api/restaurant/fetch";
 import { fetchRestaurantList } from "../random";
 import { NextRouter, withRouter } from "next/router";
-import Image from "next/image";
 import PhoneIcon from "@mui/icons-material/Phone";
-import SwiperCore, { Navigation, Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import SingleMap from "../../src/components/SingleMap";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import TabComponent from "../../src/components/TabComponent";
 
 interface DetailProps {
   router: NextRouter;
@@ -31,16 +35,16 @@ const Detail = ({ router }: DetailProps) => {
   const handlePhone = (phone: string) => {
     location.href = `tel:${phone}`;
   };
-  SwiperCore.use([Navigation, Pagination]);
+
   if (!restaurant) return null;
-  const { name, type, address, phone, img } = restaurant;
+  const { name, type, phone } = restaurant;
   return (
     <>
       <Layout>
         <Container maxWidth={"xl"}>
           <Container maxWidth={"sm"}>
             <Box>
-              <Grid container rowSpacing={1} my={5}>
+              <Grid container rowSpacing={1} my={2}>
                 <Grid item xs={6}>
                   <Grid container flexDirection={"column"} spacing={1}>
                     <Grid item>
@@ -60,19 +64,17 @@ const Detail = ({ router }: DetailProps) => {
                   justifyContent={"flex-end"}
                   alignItems={"center"}
                 >
-                  <Box
-                    sx={{
-                      padding: 1,
-                      border: "1px solid",
-                      borderRadius: "50%",
-                    }}
+                  <Fab
+                    size="medium"
+                    color="primary"
                     onClick={() => handlePhone(phone)}
                   >
                     <PhoneIcon />
-                  </Box>
+                  </Fab>
                 </Grid>
               </Grid>
-              <SingleMap address={address} code={"kakao_map"} />
+              <TabComponent restaurant={restaurant} />
+              {/*<SingleMap address={address} code={"kakao_map"} />
               <Typography>{address}</Typography>
               <Typography>메뉴</Typography>
               <Swiper slidesPerView={1} spaceBetween={10} loop navigation>
@@ -88,7 +90,7 @@ const Detail = ({ router }: DetailProps) => {
                     />
                   </SwiperSlide>
                 ))}
-              </Swiper>
+              </Swiper>*/}
             </Box>
           </Container>
         </Container>

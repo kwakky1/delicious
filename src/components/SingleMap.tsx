@@ -1,4 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import { Box, Typography } from "@mui/material";
+import kakaoMap from "../../public/kakaomap.png";
+import naverMap from "../../public/navermap.png";
+import { RestaurantType } from "../../pages/api/restaurant/fetch";
 
 declare global {
   interface Window {
@@ -7,12 +12,22 @@ declare global {
 }
 
 interface mapProps {
-  address: string;
+  restaurant: RestaurantType;
   code: string;
 }
 
+interface positionType {
+  lat: number;
+  lng: number;
+}
+
 const SingleMap = (props: mapProps) => {
-  const { address } = props;
+  const {
+    restaurant: { name, address },
+  } = props;
+
+  const [position, setPosition] = useState<positionType>({ lat: 0, lng: 0 });
+
   useEffect(() => {
     const mapScript = document.createElement("script");
 
@@ -42,6 +57,7 @@ const SingleMap = (props: mapProps) => {
                 result[0].y,
                 result[0].x
               );
+              setPosition({ lat: result[0].y, lng: result[0].x });
 
               // 결과값으로 받은 위치를 마커로 표시합니다
               const marker = new window.kakao.maps.Marker({
@@ -58,11 +74,50 @@ const SingleMap = (props: mapProps) => {
     mapScript.addEventListener("load", onLoadKakaoMap);
 
     return () => mapScript.removeEventListener("load", onLoadKakaoMap);
-  }, []);
+  }, [address]);
+
+  const handleGuide = (e: React.MouseEvent<HTMLImageElement>, name: string) => {
+    switch (name) {
+      case "kakaoMap":
+        window.location.href = `https://map.kakao.com/link/to/${props.restaurant.name},${position.lat},${position.lat}`;
+        break;
+      case "naverMap":
+        window.location.href = `http://app.map.naver.com/launchApp/?version=11&menu=walk&elat=${position.lat}&elng=${position.lng}&etitle=${props.restaurant.name}`;
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <>
       <div id={"map"} style={{ width: "100%", height: 300 }} />
+      <Box sx={{ display: "flex", justifyContent: "space-around", pt: 2 }}>
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Image
+              width={50}
+              height={50}
+              src={kakaoMap}
+              alt="kakaoMap"
+              onClick={(e) => handleGuide(e, "kakaoMap")}
+            />
+          </Box>
+          <Typography pt={1}>카카오지도</Typography>
+        </Box>
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Image
+              width={50}
+              height={50}
+              src={naverMap}
+              alt="naverMap"
+              onClick={(e) => handleGuide(e, "naverMap")}
+            />
+          </Box>
+          <Typography pt={1}>네이버지도</Typography>
+        </Box>
+      </Box>
     </>
   );
 };
