@@ -2,104 +2,159 @@ import React from "react";
 
 import Layout from "../src/components/common/Layout";
 import {
+  Badge,
+  Box,
   Button,
+  Chip,
   Container,
+  Grid,
   styled,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
 } from "@mui/material";
 import { useQuery, UseQueryResult } from "react-query";
 import { RestaurantType } from "./api/restaurant/fetch";
 import { fetchRestaurantList } from "./random";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-const CellWrapper = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "row",
-  flexGrow: 1,
-  [theme.breakpoints.down("md")]: {
-    flexDirection: "column",
-  },
-}));
+import { useRouter } from "next/router";
 
 const List = () => {
   const { data: restaurantList }: UseQueryResult<RestaurantType[], Error> =
     useQuery<RestaurantType[], Error>("restaurantList", fetchRestaurantList);
 
-  const handlePhone = (phoneNumber: string) => {
-    console.log(phoneNumber);
-    location.href = `tel:${phoneNumber}`;
-  };
-
-  const handleMenu = (imgUrl: string[]) => {
-    console.log(imgUrl);
+  const router = useRouter();
+  const handleDetail = (id: string) => {
+    router.push({
+      pathname: "/restaurant/[id]",
+      query: { id: id },
+    });
   };
 
   return (
     <>
       <Layout>
-        <Container maxWidth={"xl"}>
-          <Table>
-            <TableBody>
+        <Container maxWidth={"lg"}>
+          <Box mt={5}>
+            <Grid
+              container
+              spacing={1}
+              py={2}
+              sx={(theme) => ({
+                [theme.breakpoints.down("md")]: {
+                  display: "none",
+                },
+              })}
+            >
+              <Grid item md={2} sx={{ fontWeight: "bold" }}>
+                상호명
+              </Grid>
+              <Grid item md={2} sx={{ fontWeight: "bold" }}>
+                종류
+              </Grid>
+              <Grid item md={4} sx={{ fontWeight: "bold" }}>
+                주소
+              </Grid>
+              <Grid item md={1} sx={{ fontWeight: "bold" }}>
+                추천수
+              </Grid>
+              <Grid item md={2} sx={{ fontWeight: "bold" }}>
+                전화번호
+              </Grid>
+              <Grid item md={1} />
+            </Grid>
+            <Box>
               {restaurantList?.map((store) => {
-                const { name, type, address, phone, img } = store;
+                const { name, type, address, phone, picker, id } = store;
                 return (
-                  <TableRow key={name}>
-                    <CellWrapper>
-                      <TableCell
+                  <Box
+                    key={name}
+                    sx={(theme) => ({
+                      [theme.breakpoints.down("md")]: {
+                        my: 2,
+                        p: 1,
+                        border: "1px solid #1976d2",
+                        borderRadius: "25px",
+                      },
+                    })}
+                  >
+                    <Grid container py={2} rowSpacing={1} columnSpacing={1}>
+                      <Grid
+                        item
+                        md={2}
+                        xs={9}
+                        display={"flex"}
+                        alignItems={"center"}
                         sx={(theme) => ({
-                          width: "100%",
                           [theme.breakpoints.down("md")]: {
-                            padding: 0,
+                            fontWeight: "bold",
+                            fontSize: 18,
                           },
                         })}
                       >
                         {name}
-                      </TableCell>
-                      <TableCell
+                      </Grid>
+                      <Grid item md={2} xs={3}>
+                        <Chip label={type} />
+                      </Grid>
+                      <Grid
+                        item
+                        md={4}
+                        xs={9}
+                        display={"flex"}
+                        alignItems={"center"}
                         sx={(theme) => ({
-                          width: "100%",
                           [theme.breakpoints.down("md")]: {
-                            padding: 0,
+                            fontColor: "grey",
+                            fontSize: 14,
                           },
                         })}
                       >
-                        {type}
-                      </TableCell>
-                    </CellWrapper>
-                    <TableCell>{address}</TableCell>
-                    <CellWrapper>
-                      <TableCell
+                        {address}
+                      </Grid>
+                      <Grid
+                        item
+                        md={1}
+                        xs={3}
                         sx={(theme) => ({
-                          width: "100%",
                           [theme.breakpoints.down("md")]: {
-                            padding: 0,
+                            display: "flex",
+                            justifyContent: "center",
                           },
                         })}
                       >
-                        <Button onClick={() => handlePhone(phone)} fullWidth>
-                          전화
+                        <Badge
+                          badgeContent={picker.length}
+                          color="primary"
+                          sx={{ left: 12 }}
+                        >
+                          <FavoriteBorderIcon color="error" />
+                        </Badge>
+                      </Grid>
+                      <Grid
+                        item
+                        md={2}
+                        xs={9}
+                        display={"flex"}
+                        alignItems={"center"}
+                        sx={(theme) => ({
+                          [theme.breakpoints.down("md")]: {
+                            fontColor: "grey",
+                            fontSize: 14,
+                          },
+                        })}
+                      >
+                        {phone}
+                      </Grid>
+                      <Grid md={1} xs={3} item onClick={() => handleDetail(id)}>
+                        <Button variant={"contained"} size={"small"}>
+                          자세히
                         </Button>
-                      </TableCell>
-                      <TableCell
-                        sx={(theme) => ({
-                          width: "100%",
-                          [theme.breakpoints.down("md")]: {
-                            padding: 0,
-                          },
-                        })}
-                      >
-                        <Button onClick={() => handleMenu(img)} fullWidth>
-                          메뉴
-                        </Button>
-                      </TableCell>
-                    </CellWrapper>
-                  </TableRow>
+                      </Grid>
+                    </Grid>
+                  </Box>
                 );
               })}
-            </TableBody>
-          </Table>
+            </Box>
+          </Box>
         </Container>
       </Layout>
     </>

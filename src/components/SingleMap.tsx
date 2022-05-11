@@ -105,6 +105,7 @@ const SingleMap = (props: mapProps) => {
               src={kakaoMap}
               alt="kakaoMap"
               onClick={(e) => handleGuide(e, "kakaoMap")}
+              priority
             />
           </Box>
           <Typography pt={1}>카카오지도</Typography>
@@ -117,6 +118,7 @@ const SingleMap = (props: mapProps) => {
               src={naverMap}
               alt="naverMap"
               onClick={(e) => handleGuide(e, "naverMap")}
+              priority
             />
           </Box>
           <Typography pt={1}>네이버지도</Typography>

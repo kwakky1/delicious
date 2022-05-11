@@ -40,7 +40,6 @@ const RandomModal = ({ restaurantList, modal, setModal }: RandomModalProps) => {
   }, [isPlaying, restaurantList]);
 
   const handleDetail = () => {
-    console.log(result);
     if (result && !isPlaying) {
       router.push({
         pathname: "/restaurant/[id]",
@@ -113,7 +112,7 @@ const RandomModal = ({ restaurantList, modal, setModal }: RandomModalProps) => {
               </Button>
             </Box>
             <Grid container rowSpacing={1} columnSpacing={2}>
-              <Grid item md={6} xs={12}>
+              <Grid item xs={6}>
                 <Button
                   variant={"contained"}
                   onClick={() => setIsPlaying(true)}
@@ -123,7 +122,7 @@ const RandomModal = ({ restaurantList, modal, setModal }: RandomModalProps) => {
                   메뉴 다!다시
                 </Button>
               </Grid>
-              <Grid item md={6} xs={12}>
+              <Grid item xs={6}>
                 <Button variant={"contained"} fullWidth onClick={handleDetail}>
                   자세히보기
                 </Button>

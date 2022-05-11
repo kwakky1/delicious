@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Chip, Divider, Grid, Tab, Tabs, Typography } from "@mui/material";
 import TabPanel from "./TabPanel";
 import MenuSwiper from "./MenuSwiper";
 import SingleMap from "./SingleMap";
@@ -10,7 +10,7 @@ interface TabComponentProps {
 }
 
 const TabComponent = ({ restaurant }: TabComponentProps) => {
-  const { img, review } = restaurant;
+  const { img, review, picker } = restaurant;
   const [value, setValue] = React.useState(0);
 
   const a11yProps = (index: number) => {
@@ -39,7 +39,22 @@ const TabComponent = ({ restaurant }: TabComponentProps) => {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <Box>
+        <Typography fontWeight={"bold"} fontSize={16}>
+          이곳을 추천하는 브리즈머
+        </Typography>
+        <Box py={2}>
+          <Grid container spacing={1}>
+            {picker
+              ? picker.map((pick, index) => (
+                  <Grid item key={pick}>
+                    <Chip label={pick} />
+                  </Grid>
+                ))
+              : null}
+          </Grid>
+        </Box>
+        <Divider light />
+        <Box mt={2}>
           <Typography>{review ? review : "리뷰가 없습니다."}</Typography>
         </Box>
       </TabPanel>
