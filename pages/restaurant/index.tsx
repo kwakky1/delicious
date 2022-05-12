@@ -1,27 +1,26 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 
-import Layout from "../src/components/common/Layout";
-import {
-  Badge,
-  Box,
-  Button,
-  Chip,
-  Container,
-  Grid,
-  styled,
-} from "@mui/material";
+import Layout from "../../src/components/common/Layout";
+import { Badge, Box, Button, Chip, Container, Grid } from "@mui/material";
 import { useQuery, UseQueryResult } from "react-query";
-import { RestaurantType } from "./api/restaurant/fetch";
-import { fetchRestaurantList } from "./random";
+import { RestaurantType } from "../api/restaurant/fetch";
+import { fetchRestaurantList } from "../random";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import { useRouter } from "next/router";
+import SearchBar from "../../src/components/common/SearchBar";
+import TypeFilter from "../../src/components/TypeFilter";
+import findRestaurantType from "../../src/components/util/findRestaurantType";
 
 const List = () => {
   const { data: restaurantList }: UseQueryResult<RestaurantType[], Error> =
     useQuery<RestaurantType[], Error>("restaurantList", fetchRestaurantList);
 
   const router = useRouter();
+
+  const [search, setSearch] = useState<string>("");
+  const [typeFilter, setTypeFilter] = useState<string[]>([]);
+
   const handleDetail = (id: string) => {
     router.push({
       pathname: "/restaurant/[id]",
@@ -29,10 +28,36 @@ const List = () => {
     });
   };
 
+  const filteredRestaurant = useMemo(
+    () =>
+      restaurantList?.filter((store) => {
+        if (search) {
+          return store.name.includes(search);
+        }
+        if (typeFilter.length > 0) {
+          return typeFilter.includes(store.type);
+        }
+        return true;
+      }),
+    [restaurantList, search, typeFilter]
+  );
+
+  if (!restaurantList) return null;
+
+  const typeList = findRestaurantType(restaurantList);
+
   return (
     <>
       <Layout>
         <Container maxWidth={"lg"}>
+          <Box my={2}>
+            <SearchBar value={search} setValue={setSearch} />
+          </Box>
+          <TypeFilter
+            typeList={typeList}
+            typeFilter={typeFilter}
+            setTypeFilter={setTypeFilter}
+          />
           <Box mt={5}>
             <Grid
               container
@@ -62,7 +87,7 @@ const List = () => {
               <Grid item md={1} />
             </Grid>
             <Box>
-              {restaurantList?.map((store) => {
+              {filteredRestaurant?.map((store) => {
                 const { name, type, address, phone, picker, id } = store;
                 return (
                   <Box

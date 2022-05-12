@@ -23,11 +23,10 @@ interface navListProps {
 }
 
 const navList: navListProps[] = [
-  { label: "맛집리스트", value: "list", link: "/list" },
+  { label: "맛집리스트", value: "list", link: "/restaurant" },
   { label: "지도", value: "map", link: "/map" },
   { label: "랜덤뽑기", value: "random", link: "/random" },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Header = () => {
   const router = useRouter();

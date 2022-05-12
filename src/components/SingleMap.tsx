@@ -78,7 +78,7 @@ const SingleMap = (props: mapProps) => {
     mapScript.addEventListener("load", onLoadKakaoMap);
 
     return () => mapScript.removeEventListener("load", onLoadKakaoMap);
-  }, [address]);
+  }, [address, breezmPosition.lat, breezmPosition.lng]);
 
   const handleGuide = (e: React.MouseEvent<HTMLImageElement>, name: string) => {
     switch (name) {
