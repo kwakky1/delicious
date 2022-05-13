@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { RestaurantType } from "../../pages/api/restaurant/fetch";
 import { useRouter } from "next/router";
+import theme from "../theme";
+import { useMediaQuery } from "@mui/material";
 
 interface TotalMapProps {
   restaurantList: RestaurantType[] | undefined;
@@ -8,6 +10,7 @@ interface TotalMapProps {
 
 const TotalMap = ({ restaurantList }: TotalMapProps) => {
   const router = useRouter();
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
   const breezmPosition = {
     lat: 37.54539986598497,
     lng: 126.95249620249871,
@@ -73,7 +76,10 @@ const TotalMap = ({ restaurantList }: TotalMapProps) => {
   }, [breezmPosition.lat, breezmPosition.lng, restaurantList, router]);
   return (
     <>
-      <div id={"map"} style={{ width: "100%", height: "60vh" }} />
+      <div
+        id={"map"}
+        style={{ width: "100%", height: matches ? "65vh" : "50vh" }}
+      />
     </>
   );
 };
