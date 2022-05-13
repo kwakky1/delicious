@@ -10,15 +10,20 @@ import {
 } from "@mui/material";
 import React from "react";
 import theme from "../src/theme";
-import FoodBankIcon from "@mui/icons-material/FoodBank";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
+  const router = useRouter();
   const list = [
     { title: "맛집리스트", link: "/restaurant", icon: "🍽" },
     { title: "지도에서 보기", link: "/map", icon: "🤸🏼" },
     { title: "랜덤 뽑기", link: "/random", icon: "❓" },
   ];
   const matches = useMediaQuery(theme.breakpoints.up("md"));
+
+  const handleRouter = (link: string) => {
+    router.push(link);
+  };
   return (
     <>
       <Layout>
@@ -51,7 +56,9 @@ const Home: NextPage = () => {
                               {item.title}
                             </Typography>
                             <Box>
-                              <Button>시작하기</Button>
+                              <Button onClick={() => handleRouter(item.link)}>
+                                시작하기
+                              </Button>
                             </Box>
                           </Box>
                         </Grid>
