@@ -50,7 +50,7 @@ export interface InputType {
   field: string;
   type: string;
   label: string;
-  option?: string[];
+  option?: string[] | { id: string; label: string }[];
 }
 
 const Random = () => {
@@ -68,12 +68,10 @@ const Random = () => {
     ?.map((store) => store.picker)
     .reduce((acc, cur) => acc.concat(cur))
     .filter(
-      (v, i) =>
-        restaurantList
-          ?.map((store) => store.picker)
-          .reduce((acc, cur) => acc.concat(cur))
-          .indexOf(v) === i
+      (arr, index, callback) =>
+        index === callback.findIndex((t) => t.id === arr.id)
     );
+
   const form: InputType[] = [
     {
       field: "type",
@@ -112,7 +110,7 @@ const Random = () => {
         .filter((store) => {
           if (filter?.person && filter?.person.length > 0) {
             return store.picker.find((person) =>
-              filter.person.includes(person)
+              filter.person.includes(person.label)
             );
           }
           return true;

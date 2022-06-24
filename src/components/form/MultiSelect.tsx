@@ -17,13 +17,22 @@ const MultiSelect = ({ field, label, option }: InputType) => {
     formState: { errors },
   } = useFormContext();
   const makeOption = (value: any) =>
-    option?.map((name) => {
-      return (
-        <MenuItem key={name} value={name}>
-          <Checkbox checked={value?.indexOf(name) > -1} />
-          <ListItemText primary={name} />
-        </MenuItem>
-      );
+    option?.map((optionData) => {
+      if (typeof optionData === "string") {
+        return (
+          <MenuItem key={optionData} value={optionData}>
+            <Checkbox checked={value?.indexOf(optionData) > -1} />
+            <ListItemText primary={optionData} />
+          </MenuItem>
+        );
+      } else {
+        return (
+          <MenuItem key={optionData.id} value={optionData.label}>
+            <Checkbox checked={value?.indexOf(optionData.label) > -1} />
+            <ListItemText primary={optionData.label} />
+          </MenuItem>
+        );
+      }
     });
 
   return (

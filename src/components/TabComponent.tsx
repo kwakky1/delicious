@@ -137,6 +137,7 @@ const TabComponent = ({ restaurant }: TabComponentProps) => {
                 : null}
               <Grid item sx={{ display: "flex", alignItems: "center" }}>
                 <AddCircleIcon
+                  sx={{ cursor: "pointer" }}
                   color={"primary"}
                   onClick={(e) => handleAddPicker(e)}
                 />
