@@ -19,11 +19,20 @@ const SingleSelect = ({ field, label, option }: InputType) => {
 
   const makeOption = () =>
     option?.map((name) => {
-      return (
-        <MenuItem key={name} value={name}>
-          {name}
-        </MenuItem>
-      );
+      if (typeof name === "string") {
+        return (
+          <MenuItem key={name} value={name}>
+            {name}
+          </MenuItem>
+        );
+      } else {
+        return (
+          <MenuItem key={name.id} value={name.label}>
+            <Checkbox checked={name.label?.indexOf(name.label) > -1} />
+            <ListItemText primary={name.label} />
+          </MenuItem>
+        );
+      }
     });
 
   return (
