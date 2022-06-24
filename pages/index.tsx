@@ -78,7 +78,7 @@ const Home: NextPage = () => {
                               alignContent: "center",
                             }}
                           >
-                            <Typography fontSize={60}>{item.icon}</Typography>
+                            <Typography fontSize={50}>{item.icon}</Typography>
                           </Box>
                         </Grid>
                       </Grid>

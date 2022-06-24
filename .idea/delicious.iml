@@ -8,5 +8,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="pretendard" level="application" />
+    <orderEntry type="library" name="pretendard-dynamic-subset" level="application" />
+    <orderEntry type="library" name="pretendardvariable" level="application" />
   </component>
 </module>

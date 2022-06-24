@@ -50,7 +50,7 @@ export interface InputType {
   field: string;
   type: string;
   label: string;
-  option: string[];
+  option?: string[];
 }
 
 const Random = () => {

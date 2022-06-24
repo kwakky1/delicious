@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import Layout from "../../src/components/common/Layout";
 import { Badge, Box, Button, Chip, Container, Grid } from "@mui/material";
@@ -15,7 +15,6 @@ import findRestaurantType from "../../src/components/util/findRestaurantType";
 const List = () => {
   const { data: restaurantList }: UseQueryResult<RestaurantType[], Error> =
     useQuery<RestaurantType[], Error>("restaurantList", fetchRestaurantList);
-
   const router = useRouter();
 
   const [search, setSearch] = useState<string>("");
@@ -112,6 +111,7 @@ const List = () => {
                           [theme.breakpoints.down("md")]: {
                             fontWeight: "bold",
                             fontSize: 18,
+                            fontFamily: "Pretendard",
                           },
                         })}
                       >

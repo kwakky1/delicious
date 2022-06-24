@@ -24,7 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         img: avatar_url,
       } as UserType;
     });
-    res.status(200).json({ userInfo });
+    res.status(200).json(userInfo);
   } catch (e) {
     res.status(500).json({ error: "Unable to fetch user List" });
   }

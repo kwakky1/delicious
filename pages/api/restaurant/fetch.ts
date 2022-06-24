@@ -11,10 +11,11 @@ export interface RestaurantType {
   phone: string;
   delivery: boolean;
   visit: boolean;
-  picker: string[];
+  picker: { id: string; label: string }[];
   review: string;
   img: string[];
 }
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const notion = new Client({
@@ -49,7 +50,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               const pickerList = field[1].people
                 .map((person) => {
                   if ("type" in person) {
-                    return person.name;
+                    return { id: person.id, label: person.name };
                   }
                   return null;
                 })

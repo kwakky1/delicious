@@ -1,8 +1,9 @@
-import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { RecoilRoot } from "recoil";
 import { QueryClientProvider, QueryClient, Hydrate } from "react-query";
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
+import theme from "../src/theme";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
@@ -12,7 +13,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <RecoilRoot>
         <QueryClientProvider client={queryClient}>
           <Hydrate state={pageProps.dehydratedState}>
-            <Component {...pageProps} />
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </ThemeProvider>
           </Hydrate>
         </QueryClientProvider>
       </RecoilRoot>
