@@ -24,7 +24,7 @@ export default class MyDocument extends Document {
             type="image/png"
             sizes="32x32"
           />
-          <link rel="apple-touch-icon" href="/public/icon/icon-192x192.png" />
+          <link rel="apple-touch-icon" href="/icon/icon-192x192.png" />
           <meta name="msapplication-TileColor" content="#FF98BA" />
           <link
             href="/splashscreens/iphone5_splash.png"
