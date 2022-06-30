@@ -56,8 +56,13 @@ export interface InputType {
 const Random = () => {
   const [modal, setModal] = useState<boolean>(false);
 
-  const { data: restaurantList }: UseQueryResult<RestaurantType[], Error> =
-    useQuery<RestaurantType[], Error>("restaurantList", fetchRestaurantList);
+  const {
+    data: restaurantList,
+    isLoading,
+  }: UseQueryResult<RestaurantType[], Error> = useQuery<
+    RestaurantType[],
+    Error
+  >("restaurantList", fetchRestaurantList);
   const methods = useForm<FormInput>({ mode: "all" });
   const typeOption = restaurantList
     ?.map((store) => store.type)

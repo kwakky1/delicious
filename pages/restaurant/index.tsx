@@ -27,6 +27,11 @@ const List = () => {
     });
   };
 
+  const handleAddRestaurant = () => {
+    console.log("추가");
+    // @todo 어떤 필드를 추가할지 봐야함 모달창? 혹은 추가 페이지로 가야함
+  };
+
   const filteredRestaurant = useMemo(
     () =>
       restaurantList?.filter((store) => {
@@ -50,7 +55,16 @@ const List = () => {
       <Layout>
         <Container maxWidth={"lg"}>
           <Box my={2}>
-            <SearchBar value={search} setValue={setSearch} />
+            <Grid container spacing={1}>
+              <Grid item xs={10}>
+                <SearchBar value={search} setValue={setSearch} />
+              </Grid>
+              <Grid item xs={2}>
+                <Button variant={"contained"} onClick={handleAddRestaurant}>
+                  추가
+                </Button>
+              </Grid>
+            </Grid>
           </Box>
           <TypeFilter
             typeList={typeList}

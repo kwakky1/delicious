@@ -11,18 +11,75 @@ export default class MyDocument extends Document {
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <link rel="shortcut icon" href="/static/favicon.ico" />
+          <link rel="manifest" href="/manifest.json" />
+          <link
+            href="/public/favicons/favicon-16x16.png"
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+          />
+          <link
+            href="/public/favicons/favicon-32x32.png"
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+          />
+          <link rel="apple-touch-icon" href="/public/icon/icon-192x192.png" />
+          <meta name="msapplication-TileColor" content="#FF98BA" />
+          <link
+            href="/public/splashscreens/iphone5_splash.png"
+            media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image"
+          />
+          <link
+            href="/public/splashscreens/iphone6_splash.png"
+            media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image"
+          />
+          <link
+            href="/public/splashscreens/iphoneplus_splash.png"
+            media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
+            rel="apple-touch-startup-image"
+          />
+          <link
+            href="/public/splashscreens/iphonex_splash.png"
+            media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+            rel="apple-touch-startup-image"
+          />
+          <link
+            href="/public/splashscreens/iphonexr_splash.png"
+            media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image"
+          />
+          <link
+            href="/public/splashscreens/iphonexsmax_splash.png"
+            media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
+            rel="apple-touch-startup-image"
+          />
+          <link
+            href="/public/splashscreens/ipad_splash.png"
+            media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image"
+          />
+          <link
+            href="/public/splashscreens/ipadpro1_splash.png"
+            media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image"
+          />
+          <link
+            href="/public/splashscreens/ipadpro3_splash.png"
+            media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image"
+          />
+          <link
+            href="/public/splashscreens/ipadpro2_splash.png"
+            media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image"
+          />
           {/*<link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />*/}
-          <link
-            rel="stylesheet"
-            // as="style"
-            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css"
-            crossOrigin="anonymous"
-          />
-
           {/* Inject MUI styles first to match with the prepend: true configuration. */}
           {(this.props as any).emotionStyleTags}
         </Head>
