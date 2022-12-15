@@ -26,6 +26,7 @@ const navList: navListProps[] = [
   { label: "맛집리스트", value: "list", link: "/restaurant" },
   { label: "지도", value: "map", link: "/map" },
   { label: "랜덤뽑기", value: "random", link: "/random" },
+  { label: "밍글링조뽑기", value: "group", link: "/group" },
 ];
 
 const Header = () => {
