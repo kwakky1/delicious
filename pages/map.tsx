@@ -7,7 +7,6 @@ import { fetchRestaurantList } from "./random";
 import TotalMap from "../src/components/TotalMap";
 import SearchBar from "../src/components/common/SearchBar";
 import findRestaurantType from "../src/components/util/findRestaurantType";
-import Filter from "../src/components/util/Filter";
 import TypeFilter from "../src/components/TypeFilter";
 
 const Map = () => {
@@ -48,7 +47,7 @@ const Map = () => {
             setTypeFilter={setTypeFilter}
           />
           <Box mt={2}>
-            <TotalMap restaurantList={filteredRestaurant} />
+            {/*<TotalMap restaurantList={filteredRestaurant} />*/}
           </Box>
         </Container>
       </Layout>

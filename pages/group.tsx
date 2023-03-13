@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../src/components/common/Layout";
 import { Box, Container, Grid, Typography } from "@mui/material";
-import makeGroup from "../src/components/util/makeGroup";
+import MakeTeam from "./MakeTeam";
 
 const Group = () => {
-  const group = makeGroup();
+  const [result, setResult] = useState<{ name: string }[][]>([]);
   return (
     <>
       <Layout>
         <Container maxWidth={"xl"}>
           <Box p={4}>
             <Grid container spacing={0.5}>
-              {group.map((team, index) => {
+              {result?.map((team, index) => {
                 return (
                   <Grid key={index} item xs={4}>
                     <Box p={2}>
@@ -21,7 +21,7 @@ const Group = () => {
                             key={index}
                             sx={index === 0 ? { fontWeight: "bold" } : {}}
                           >
-                            {index === 0 ? `조장: ${member}` : member}
+                            {index === 0 ? `조장: ${member.name}` : member.name}
                           </Typography>
                         );
                       })}
@@ -30,6 +30,9 @@ const Group = () => {
                 );
               })}
             </Grid>
+          </Box>
+          <Box>
+            <MakeTeam setResult={setResult} />
           </Box>
         </Container>
       </Layout>

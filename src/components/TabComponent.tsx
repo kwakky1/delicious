@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import TabPanel from "./TabPanel";
 import MenuSwiper from "./MenuSwiper";
-import SingleMap from "./SingleMap";
+// import SingleMap from "./SingleMap";
 import { RestaurantType } from "../../pages/api/restaurant/fetch";
 import ReviewModal, { updateRestaurant } from "./ReviewModal";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -27,7 +27,6 @@ import {
   UseQueryResult,
 } from "react-query";
 import AutoComplete from "./form/AutoComplete";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 interface TabComponentProps {
   restaurant: RestaurantType;
@@ -170,7 +169,7 @@ const TabComponent = ({ restaurant }: TabComponentProps) => {
           </Button>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <SingleMap restaurant={restaurant} code={"kakao_map"} />
+          {/*<SingleMap restaurant={restaurant} code={"kakao_map"} />*/}
         </TabPanel>
         <TabPanel value={value} index={2}>
           <MenuSwiper img={img} />

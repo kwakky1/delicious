@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from "react";
 
 import Layout from "../../src/components/common/Layout";
 import { Badge, Box, Button, Chip, Container, Grid } from "@mui/material";
-import { useQuery, UseQueryResult } from "react-query";
+import { dehydrate, QueryClient, useQuery, UseQueryResult } from "react-query";
 import { RestaurantType } from "../api/restaurant/fetch";
 import { fetchRestaurantList } from "../random";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -201,3 +201,18 @@ const List = () => {
 };
 
 export default List;
+
+export async function getStaticProps() {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery<RestaurantType[]>(
+    "restaurantList",
+    fetchRestaurantList
+  );
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
