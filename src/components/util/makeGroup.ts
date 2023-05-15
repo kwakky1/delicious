@@ -2,7 +2,7 @@ interface ListState {
   [index: string]: { name: string }[];
 }
 
-const makeGroup = (list: ListState) => {
+const makeGroup = (list: ListState, teamPersonnel: number) => {
   function shuffle(array: { name: string }[][]) {
     return array.map((el) => {
       return el.sort(() => Math.random() - 0.5);
@@ -16,10 +16,10 @@ const makeGroup = (list: ListState) => {
   );
   // 배열의 배열 랜덤 셔플
   const shuffledListByTeam = shuffle(listByTeam);
-  const dishTeamLength = Math.ceil(total / 4);
+  const dishTeamLength = Math.ceil(total / teamPersonnel);
   const listByDish: any[][] = Array.from(
     Array(dishTeamLength),
-    () => new Array(4)
+    () => new Array(teamPersonnel)
   );
   shuffledListByTeam.forEach((team, teamIndex) => {
     team.forEach((value, index) => {

@@ -31,6 +31,7 @@ const MakeTeam = (props: Props) => {
   };
 
   const [list, setList] = useState<ListState>(defaultList);
+  const [personnel, setPersonnel] = useState<number>(4);
   const [teamName, setTeamName] = useState<string>("");
 
   const handleIncrease = (teamName: string) => {
@@ -40,7 +41,6 @@ const MakeTeam = (props: Props) => {
   };
   const handleIncreaseGroup = () => {
     // 대표라는 키가 이미 있는경우 alert
-    //
     if (!teamName) {
       return alert("팀 이름을 적어주세요!");
     }
@@ -74,7 +74,7 @@ const MakeTeam = (props: Props) => {
     };
 
   const handleMakeGroup = () => {
-    const result = makeGroup(list);
+    const result = makeGroup(list, personnel);
     setResult(result);
   };
 
@@ -88,9 +88,17 @@ const MakeTeam = (props: Props) => {
           sx={{ marginRight: 2 }}
           label={"팀명"}
         />
-        <Button variant={"contained"} onClick={handleIncreaseGroup}>
+        <Button variant={"contained"} onClick={handleIncreaseGroup} sx={{ mr: 2}}>
           그룹늘리기
         </Button>
+        <TextField
+            type={"number"}
+            value={personnel}
+            size={"small"}
+            onChange={(e) => setPersonnel(Number(e.target.value))}
+            sx={{ marginRight: 2 }}
+            label={"팀 인원수"}
+        />
       </Box>
       {Object.entries(list).map(([teamKey, team]) => {
         return (
