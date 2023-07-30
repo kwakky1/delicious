@@ -1,7 +1,8 @@
-import React, { ChangeEvent, Fragment, useState } from "react";
+import React, { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { Badge, Box, Button, Grid, TextField, Typography } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import makeGroup from "../src/components/util/makeGroup";
+import axios from "axios";
 
 interface ListState {
   [index: string]: { name: string }[];
@@ -12,7 +13,7 @@ interface Props {
 
 const MakeTeam = (props: Props) => {
   const { setResult } = props;
-  const defaultList = {
+  /*const defaultList = {
     it: [{ name: "애드워드" }, { name: "앤디" }],
     ms: [{ name: "엘라" }, { name: "제나" }, { name: "메이브" }],
     pd: [
@@ -28,11 +29,20 @@ const MakeTeam = (props: Props) => {
     pc: [{ name: "힘" }, { name: "엠지" }, { name: "찰리" }],
     ec: [{ name: "크리스" }, { name: "테오" }],
     dp: [{ name: "윌" }, { name: "젠마" }],
-  };
+  };*/
 
-  const [list, setList] = useState<ListState>(defaultList);
+  const [list, setList] = useState<ListState>({});
   const [personnel, setPersonnel] = useState<number>(4);
   const [teamName, setTeamName] = useState<string>("");
+
+  useEffect(() => {
+    axios.get("/api/staff/fetch").then((res) => {
+      const {
+        data: { staff },
+      } = res;
+      setList(staff);
+    });
+  }, []);
 
   const handleIncrease = (teamName: string) => {
     const total = list;
@@ -78,8 +88,24 @@ const MakeTeam = (props: Props) => {
     setResult(result);
   };
 
+  const handleSaveGroup = () => {
+    axios
+      .post("/api/staff/update", {
+        id: "64c5ee7adf1fa3a578cbabf3",
+        staff: list,
+      })
+      .then((res) => {
+        if (res.data.success) {
+          alert("저장 되었습니다.");
+        }
+      })
+      .catch(() => {
+        alert("저장실패, 다시한번 시도해주세요.");
+      });
+  };
+
   return (
-    <>
+    <Box py={10}>
       <Box p={2}>
         <TextField
           value={teamName}
@@ -88,18 +114,23 @@ const MakeTeam = (props: Props) => {
           sx={{ marginRight: 2 }}
           label={"팀명"}
         />
-        <Button variant={"contained"} onClick={handleIncreaseGroup} sx={{ mr: 2}}>
+        <Button
+          variant={"contained"}
+          onClick={handleIncreaseGroup}
+          sx={{ mr: 2 }}
+        >
           그룹늘리기
         </Button>
         <TextField
-            type={"number"}
-            value={personnel}
-            size={"small"}
-            onChange={(e) => setPersonnel(Number(e.target.value))}
-            sx={{ marginRight: 2 }}
-            label={"팀 인원수"}
+          type={"number"}
+          value={personnel}
+          size={"small"}
+          onChange={(e) => setPersonnel(Number(e.target.value))}
+          sx={{ marginRight: 2 }}
+          label={"팀 인원수"}
         />
       </Box>
+
       {Object.entries(list).map(([teamKey, team]) => {
         return (
           <Fragment key={`${teamKey}`}>
@@ -157,7 +188,8 @@ const MakeTeam = (props: Props) => {
         );
       })}
       <Button onClick={handleMakeGroup}>조 만들기</Button>
-    </>
+      <Button onClick={handleSaveGroup}>저장하기</Button>
+    </Box>
   );
 };
 

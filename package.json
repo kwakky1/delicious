@@ -17,6 +17,10 @@
     "@mui/material": "^5.6.1",
     "@mui/x-data-grid-pro": "^5.9.0",
     "@notionhq/client": "^1.0.4",
+    "@types/mongoose": "^5.11.97",
+    "axios": "^1.4.0",
+    "mongodb": "^5.7.0",
+    "mongoose": "^7.4.1",
     "next": "12.1.5",
     "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.5.4",
@@ -30,7 +34,7 @@
     "swiper": "^8.1.4"
   },
   "devDependencies": {
-    "@types/node": "17.0.24",
+    "@types/node": "^17.0.24",
     "@types/react": "18.0.5",
     "@types/react-dom": "18.0.1",
     "eslint": "8.13.0",
