@@ -1,7 +1,9 @@
 import React, { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { Badge, Box, Button, Grid, TextField, Typography } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
-import makeGroup from "../src/components/util/makeGroup";
+import makeGroup, {
+  createDiverseGroup,
+} from "../src/components/util/makeGroup";
 import axios from "axios";
 
 interface ListState {
@@ -40,6 +42,7 @@ const MakeTeam = (props: Props) => {
       const {
         data: { staff },
       } = res;
+      console.log(staff);
       setList(staff);
     });
   }, []);
@@ -85,6 +88,88 @@ const MakeTeam = (props: Props) => {
 
   const handleMakeGroup = () => {
     const result = makeGroup(list, personnel);
+    console.log(result);
+    setResult(result);
+  };
+
+  const handleMakeBestGroup = () => {
+    const previousGroups = [
+      [
+        [
+          { name: "월리" },
+          { name: "맥스" },
+          { name: "에이미" },
+          { name: "하이" },
+        ],
+        [
+          { name: "크리스" },
+          { name: "애드워드" },
+          { name: "테드" },
+          { name: "마틴" },
+        ],
+        [
+          { name: "리버" },
+          { name: "루나" },
+          { name: "알파" },
+          { name: "케빈" },
+        ],
+        [{ name: "앨리슨" }, { name: "앤디" }, { name: "존" }],
+        [
+          { name: "엠지" },
+          { name: "엘라" },
+          { name: "마일로" },
+          { name: "테오" },
+        ],
+        [
+          { name: "브루노" },
+          { name: "윌" },
+          { name: "폴" },
+          { name: "데이지" },
+        ],
+        [
+          { name: "헨리" },
+          { name: "젠마" },
+          { name: "올리비아" },
+          { name: "제이콥" },
+        ],
+      ],
+      [
+        [
+          { name: "마일로" },
+          { name: "폴" },
+          { name: "올리비아" },
+          { name: "테오" },
+        ],
+        [{ name: "존" }, { name: "헨리" }, { name: "알파" }, { name: "엘라" }],
+        [
+          { name: "에이미" },
+          { name: "마틴" },
+          { name: "크리스" },
+          { name: "데이지" },
+        ],
+        [
+          { name: "케빈" },
+          { name: "엠지" },
+          { name: "제이콥" },
+          { name: "하이" },
+        ],
+        [
+          { name: "애드워드" },
+          { name: "찰리" },
+          { name: "테드" },
+          { name: "리버" },
+        ],
+        [
+          { name: "브루노" },
+          { name: "월리" },
+          { name: "젠마" },
+          { name: "맥스" },
+        ],
+        [{ name: "앤디" }, { name: "윌" }, { name: "루나" }],
+      ],
+    ];
+    const result = createDiverseGroup(list, previousGroups, 4);
+    console.log(result);
     setResult(result);
   };
 
@@ -188,6 +273,7 @@ const MakeTeam = (props: Props) => {
         );
       })}
       <Button onClick={handleMakeGroup}>조 만들기</Button>
+      <Button onClick={handleMakeBestGroup}>베스트 조 만들기</Button>
       <Button onClick={handleSaveGroup}>저장하기</Button>
     </Box>
   );

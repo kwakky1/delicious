@@ -1,6 +1,9 @@
-interface ListState {
-  [index: string]: { name: string }[];
+interface Person {
+  name: string;
 }
+
+type Group = Person[][];
+type ListState = { [team: string]: Person[] };
 
 const makeGroup = (list: ListState, teamPersonnel: number) => {
   function shuffle(array: { name: string }[][]) {
@@ -59,5 +62,51 @@ const makeGroup = (list: ListState, teamPersonnel: number) => {
 
   return shuffle(listByDish);
 };
+
+function calculateSimilarity(group1: Group, group2: Group): number {
+  let similarity = 0;
+  for (const team1 of group1) {
+    for (const team2 of group2) {
+      const set1 = new Set(team1.map((person) => person.name));
+      const set2 = new Set(team2.map((person) => person.name));
+      const intersection = new Set([...set1].filter((x) => set2.has(x)));
+      similarity += intersection.size;
+    }
+  }
+  return similarity;
+}
+
+function createGroup(list: ListState, teamPersonnel: number): Group {
+  // 여기에는 makeGroup 함수의 로직이 들어가야 합니다.
+  return makeGroup(list, teamPersonnel);
+}
+
+export function createDiverseGroup(
+  list: ListState,
+  previousGroups: Group[],
+  teamPersonnel: number,
+  attempts: number = 100
+): Group {
+  let bestGroup = createGroup(list, teamPersonnel);
+  let bestSimilarity = previousGroups.reduce(
+    (acc, group) => acc + calculateSimilarity(bestGroup, group),
+    0
+  );
+
+  for (let i = 0; i < attempts - 1; i++) {
+    const newGroup = createGroup(list, teamPersonnel);
+    const newSimilarity = previousGroups.reduce(
+      (acc, group) => acc + calculateSimilarity(newGroup, group),
+      0
+    );
+
+    if (newSimilarity < bestSimilarity) {
+      bestGroup = newGroup;
+      bestSimilarity = newSimilarity;
+    }
+  }
+
+  return bestGroup;
+}
 
 export default makeGroup;
