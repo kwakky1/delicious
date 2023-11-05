@@ -1,6 +1,6 @@
-import React, { useMemo, useState, Suspense } from "react";
-import Layout from "../src/components/common/Layout";
-import { RestaurantType } from "./api/restaurant/fetch";
+"use client";
+
+import React from "react";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 
 import {
@@ -13,11 +13,10 @@ import {
 
 import { GetStaticProps } from "next";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
-import MultiSelect from "../src/components/form/MultiSelect";
-import { server } from "../src/config";
-import RandomModal from "../src/components/RandomModal";
+import { server } from "@/config";
+import RandomModal from "@/components/RandomModal";
 
-export const fetchRestaurantList = async (): Promise<RestaurantType[]> => {
+/*export const fetchRestaurantList = async (): Promise<RestaurantType[]> => {
   const res = await fetch(`${server}/api/restaurant/fetch`, {
     method: "POST",
     headers: {
@@ -28,9 +27,9 @@ export const fetchRestaurantList = async (): Promise<RestaurantType[]> => {
     return res.json();
   }
   throw new Error("FetchRestaurantList Network response not ok");
-};
+};*/
 
-export const getStaticProps: GetStaticProps = async (
+/*export const getStaticProps: GetStaticProps = async (
   context
 ): Promise<{
   props: { dehydratedState: DehydratedState };
@@ -38,7 +37,7 @@ export const getStaticProps: GetStaticProps = async (
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery("restaurantList", fetchRestaurantList);
   return { props: { dehydratedState: dehydrate(queryClient) } };
-};
+};*/
 
 interface FormInput {
   type: string[];
@@ -54,9 +53,7 @@ export interface InputType {
 }
 
 const Random = () => {
-  const [modal, setModal] = useState<boolean>(false);
-
-  const {
+  /*const {
     data: restaurantList,
     isLoading,
   }: UseQueryResult<RestaurantType[], Error> = useQuery<
@@ -76,8 +73,8 @@ const Random = () => {
       (arr, index, callback) =>
         index === callback.findIndex((t) => t.id === arr.id)
     );
-
-  const form: InputType[] = [
+*/
+  /* const form: InputType[] = [
     {
       field: "type",
       type: "multiSelect",
@@ -96,14 +93,14 @@ const Random = () => {
       label: "장소",
       option: ["배달", "방문"],
     },
-  ];
-  const [filter, setFilter] = useState<FormInput | null>(null);
+  ];*/
+  /*const [filter, setFilter] = useState<FormInput | null>(null);
   const onSubmit: SubmitHandler<FormInput> = (data) => {
     setFilter(data);
     setModal(true);
-  };
+  };*/
 
-  const filteredRestaurant = useMemo(
+  /*const filteredRestaurant = useMemo(
     () =>
       restaurantList
         ?.filter((store) => {
@@ -135,58 +132,57 @@ const Random = () => {
         }),
     [filter, restaurantList]
   );
-
+*/
   return (
     <>
-      <Layout>
-        <Container maxWidth={"xl"}>
-          <Box pt={4}>
-            <Typography align={"center"} variant={"h4"}>
-              브리즘 먹거리 랜덤뽑기
-            </Typography>
-          </Box>
-          <Container maxWidth={"md"}>
-            <FormProvider {...methods}>
-              <form onSubmit={methods.handleSubmit(onSubmit)}>
-                <Grid container spacing={2} pt={2} flexDirection={"column"}>
-                  {form.map((input) => {
-                    const { type, field, label, option } = input;
-                    switch (type) {
-                      case "multiSelect":
-                        return (
-                          <MultiSelect
-                            key={field}
-                            type={type}
-                            field={field}
-                            label={label}
-                            option={option}
-                          />
-                        );
-                      default:
-                        return null;
-                    }
-                  })}
-                  <Grid item xs={12}>
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      color="primary"
-                      fullWidth
-                    >
-                      랜덤뽑기
-                    </Button>
-                  </Grid>
+      <div>랜덤</div>
+      {/*<Container maxWidth={"xl"}>
+        <Box pt={4}>
+          <Typography align={"center"} variant={"h4"}>
+            브리즘 먹거리 랜덤뽑기
+          </Typography>
+        </Box>
+        <Container maxWidth={"md"}>
+          <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(onSubmit)}>
+              <Grid container spacing={2} pt={2} flexDirection={"column"}>
+                {form.map((input) => {
+                  const { type, field, label, option } = input;
+                  switch (type) {
+                    case "multiSelect":
+                      return (
+                        <MultiSelect
+                          key={field}
+                          type={type}
+                          field={field}
+                          label={label}
+                          option={option}
+                        />
+                      );
+                    default:
+                      return null;
+                  }
+                })}
+                <Grid item xs={12}>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    color="primary"
+                    fullWidth
+                  >
+                    랜덤뽑기
+                  </Button>
                 </Grid>
-              </form>
-            </FormProvider>
-          </Container>
+              </Grid>
+            </form>
+          </FormProvider>
         </Container>
-      </Layout>
+      </Container>
       <RandomModal
         restaurantList={filteredRestaurant}
         modal={modal}
         setModal={setModal}
-      />
+      />*/}
     </>
   );
 };

@@ -14,12 +14,8 @@ import {
 } from "@mui/material";
 import TabPanel from "./TabPanel";
 import MenuSwiper from "./MenuSwiper";
-// import SingleMap from "./SingleMap";
-import { RestaurantType } from "../../pages/api/restaurant/fetch";
-import ReviewModal, { updateRestaurant } from "./ReviewModal";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { server } from "../config";
-import { UserType } from "../../pages/api/fetchUsers";
 import {
   useMutation,
   useQuery,
@@ -28,11 +24,7 @@ import {
 } from "react-query";
 import AutoComplete from "./form/AutoComplete";
 
-interface TabComponentProps {
-  restaurant: RestaurantType;
-}
-
-export const fetchUserList = async (): Promise<UserType[]> => {
+/*export const fetchUserList = async (): Promise<UserType[]> => {
   const res = await fetch(`${server}/api/fetchUsers`, {
     method: "POST",
     headers: {
@@ -43,9 +35,9 @@ export const fetchUserList = async (): Promise<UserType[]> => {
     return res.json();
   }
   throw new Error("FetchRestaurantList Network response not ok");
-};
+};*/
 
-const useUpdateRestaurant = () => {
+/*const useUpdateRestaurant = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
@@ -56,10 +48,10 @@ const useUpdateRestaurant = () => {
       },
     }
   );
-};
+};*/
 
-const TabComponent = ({ restaurant }: TabComponentProps) => {
-  const { data: userList }: UseQueryResult<UserType[], Error> = useQuery<
+const TabComponent = () => {
+  /*const { data: userList }: UseQueryResult<UserType[], Error> = useQuery<
     UserType[],
     Error
   >("userList", fetchUserList);
@@ -99,12 +91,12 @@ const TabComponent = ({ restaurant }: TabComponentProps) => {
   const handleAddPicker = (event: React.MouseEvent<SVGSVGElement>) => {
     setAnchorEl(event.currentTarget);
     setOpen((previousOpen) => !previousOpen);
-  };
+  };*/
 
   return (
     <>
-      <Box sx={{ width: "100%" }}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Box sx={{ width: "100%" }}></Box>
+      {/*<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
             value={value}
             onChange={handleChange}
@@ -169,13 +161,13 @@ const TabComponent = ({ restaurant }: TabComponentProps) => {
           </Button>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          {/*<SingleMap restaurant={restaurant} code={"kakao_map"} />*/}
+          <SingleMap restaurant={restaurant} code={"kakao_map"} />
         </TabPanel>
         <TabPanel value={value} index={2}>
           <MenuSwiper img={img} />
         </TabPanel>
-      </Box>
-      <ReviewModal restaurant={restaurant} modal={modal} setModal={setModal} />
+      </Box>*/}
+      {/*<ReviewModal restaurant={restaurant} modal={modal} setModal={setModal} />*/}
     </>
   );
 };

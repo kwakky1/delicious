@@ -1,9 +1,9 @@
+"use client";
+
 import React, { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { Badge, Box, Button, Grid, TextField, Typography } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
-import makeGroup, {
-  createDiverseGroup,
-} from "../src/components/util/makeGroup";
+import makeGroup, { createDiverseGroup } from "@/components/util/makeGroup";
 import axios from "axios";
 
 interface ListState {
@@ -15,23 +15,6 @@ interface Props {
 
 const MakeTeam = (props: Props) => {
   const { setResult } = props;
-  /*const defaultList = {
-    it: [{ name: "애드워드" }, { name: "앤디" }],
-    ms: [{ name: "엘라" }, { name: "제나" }, { name: "메이브" }],
-    pd: [
-      { name: "테드" },
-      { name: "맥스" },
-      { name: "루나" },
-      { name: "비니" },
-      { name: "폴" },
-      { name: "제이콥" },
-    ],
-    m: [{ name: "하이" }, { name: "마틴" }, { name: "리버" }],
-    d: [{ name: "헨리" }, { name: "에이미" }, { name: "마일로" }],
-    pc: [{ name: "힘" }, { name: "엠지" }, { name: "찰리" }],
-    ec: [{ name: "크리스" }, { name: "테오" }],
-    dp: [{ name: "윌" }, { name: "젠마" }],
-  };*/
 
   const [list, setList] = useState<ListState>({});
   const [personnel, setPersonnel] = useState<number>(4);

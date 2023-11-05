@@ -1,7 +1,13 @@
 import React from "react";
-import { InputType } from "../../../pages/random";
 import { Controller, useFormContext } from "react-hook-form";
 import { Grid, TextField } from "@mui/material";
+
+interface InputType {
+  field: string;
+  type: string;
+  label: string;
+  option?: string[] | { id: string; label: string }[];
+}
 
 const LongTextInput = ({ field, label }: InputType) => {
   const {

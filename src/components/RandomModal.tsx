@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
@@ -8,18 +10,10 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { RestaurantType } from "../../pages/api/restaurant/fetch";
 import { RandomReveal } from "react-random-reveal";
-import { useRouter } from "next/router";
 
-interface RandomModalProps {
-  restaurantList?: RestaurantType[];
-  modal: boolean;
-  setModal: (value: boolean) => void;
-}
-
-const RandomModal = ({ restaurantList, modal, setModal }: RandomModalProps) => {
-  const router = useRouter();
+const RandomModal = () => {
+  /*const router = useRouter();
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [result, setResult] = useState<RestaurantType | null>(null);
   const randomValue = useRef(null);
@@ -48,12 +42,12 @@ const RandomModal = ({ restaurantList, modal, setModal }: RandomModalProps) => {
     } else {
       alert("랜덤뽑기를 완료해주세요!");
     }
-  };
+  };*/
 
   return (
     <>
-      <Dialog open={modal} onClose={handleClose} fullWidth maxWidth="sm">
-        <DialogTitle
+      <Dialog open={false} fullWidth maxWidth="sm">
+        {/*<DialogTitle
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -83,7 +77,7 @@ const RandomModal = ({ restaurantList, modal, setModal }: RandomModalProps) => {
                   duration={Infinity}
                   isPlaying={isPlaying}
                 />
-                {/*{!isPlaying ? " 🎉" : ""}*/}
+                {!isPlaying ? " 🎉" : ""}
               </Typography>
               {!isPlaying && (
                 <Typography sx={{ fontSize: 30, fontFamily: "bold" }}>
@@ -129,7 +123,7 @@ const RandomModal = ({ restaurantList, modal, setModal }: RandomModalProps) => {
               </Grid>
             </Grid>
           </Box>
-        </DialogContent>
+        </DialogContent>*/}
       </Dialog>
     </>
   );

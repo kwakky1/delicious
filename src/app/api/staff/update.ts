@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import clientPromise from "../../../src/lib/database";
+import clientPromise from "@/lib/database";
 import { ObjectId } from "mongodb";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   AppBar,
@@ -12,7 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import logo from "../../../public/logo.png";
 

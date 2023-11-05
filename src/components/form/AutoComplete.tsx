@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import { Autocomplete, TextField } from "@mui/material";
 import { useQuery, UseQueryResult } from "react-query";
-import { UserType } from "../../../pages/api/fetchUsers";
-import { fetchUserList } from "../TabComponent";
-import { updateRestaurant } from "../ReviewModal";
-import { RestaurantType } from "../../../pages/api/restaurant/fetch";
+/*import { fetchUserList } from "../TabComponent";*/
 
-interface AutoCompleteProps {
+/*interface AutoCompleteProps {
   restaurant: RestaurantType;
   setOpen: (value: boolean) => void;
-}
+}*/
 
-const AutoComplete = ({ restaurant, setOpen }: AutoCompleteProps) => {
-  const { data: userList }: UseQueryResult<UserType[], Error> = useQuery<
+const AutoComplete = (/*{ restaurant, setOpen }: AutoCompleteProps*/) => {
+  /*const { data: userList }: UseQueryResult<UserType[], Error> = useQuery<
     UserType[],
     Error
   >("userList", fetchUserList);
@@ -34,9 +31,10 @@ const AutoComplete = ({ restaurant, setOpen }: AutoCompleteProps) => {
       updateRestaurant(copyRestaurant, "picker").then();
       setOpen(false);
     }
-  };
+  };*/
   return (
-    <Autocomplete
+    <div></div>
+    /*<Autocomplete
       sx={{ width: 100 }}
       value={value}
       onChange={(event, value, reason, details) => handleOnchange(value)}
@@ -47,7 +45,7 @@ const AutoComplete = ({ restaurant, setOpen }: AutoCompleteProps) => {
       renderInput={(params) => (
         <TextField {...params} size={"small"} label="추천" />
       )}
-    />
+    />*/
   );
 };
 
