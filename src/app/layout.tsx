@@ -19,7 +19,6 @@ export default function RootLayout({
           name="viewport"
           content="initial-scale=1, viewport-fit=cover, width=device-width"
         />
-        <meta name="theme-color" content={theme.palette.primary.main} />
         <link rel="manifest" href="/manifest.json" />
         <link
           href="/favicons/favicon-16x16.png"
